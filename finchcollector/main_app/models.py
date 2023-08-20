@@ -7,12 +7,25 @@ MEALS = (
     ('L', 'Lunch'),
     ('D', 'Dinner')
 )
+# Create your models here.
+class Toy(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.name
+
+  def get_absolute_url(self):
+    return reverse('toys_detail', kwargs={'pk': self.id})
+
 
 # Create your models here.
 class Finch(models.Model):
     name = models.CharField(max_length=100)
     size = models.CharField(max_length=100)
     habitation = models.TextField(max_length=300)
+      # Add the M:M relationship
+    toys = models.ManyToManyField(Toy)
 
   # new code below
     def __str__(self):
